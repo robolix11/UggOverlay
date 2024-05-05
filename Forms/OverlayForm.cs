@@ -31,7 +31,7 @@ namespace UGG_Overlay.Forms
 			this.TransparencyKey = Constants.Colors.TRANSPARENCY;
 			this.TopMost = true;
 			this.FormBorderStyle = FormBorderStyle.None;
-			//this.ShowInTaskbar = false;
+			this.ShowInTaskbar = false;
 
 
 			MakeFormClickTrough();
@@ -53,7 +53,6 @@ namespace UGG_Overlay.Forms
 		{
 			RECT _Rect;
 
-			//IntPtr handle = FindWindow(null, "Unbenannt – Notepad");
 			IntPtr handle = FindWindow(null, WINDOW_NAME);
 			GetWindowRect(handle, out _Rect);
 			//Console.WriteLine($"Current Handle Rect [Left:{_Rect.Left},Top:{_Rect.Top},Right:{_Rect.Right},Bottom:{_Rect.Bottom}]");
