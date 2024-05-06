@@ -144,7 +144,14 @@ namespace UGG_Overlay.Forms
 				default: return;
 			}
 
-			var uggModel = APIs.UGG_Api.UGG_API_Control.GetUGGDisplayModel(apiGameMode, gameInfo.Item2);
+			string apiChampionName = null;
+			switch (gameInfo.Item2)
+			{
+				case "Nunu & Willump": apiChampionName = "Nunu"; break;
+				default: apiChampionName = gameInfo.Item2; break;
+			}
+
+			var uggModel = APIs.UGG_Api.UGG_API_Control.GetUGGDisplayModel(apiGameMode, apiChampionName);
 			if (uggModel == null) { return; }
 
 			currentChampionName = gameInfo.Item2;
