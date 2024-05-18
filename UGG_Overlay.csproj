@@ -116,6 +116,7 @@
     <Compile Include="APIs\UGG_Api\Models\StartItemsDisplayModel.cs" />
     <Compile Include="APIs\UGG_Api\UGG_API_Control.cs" />
     <Compile Include="ApplicationManager.cs" />
+    <Compile Include="ClientWindowManager.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controls\OverlayCoreItemsDisplay.cs">
       <SubType>UserControl</SubType>

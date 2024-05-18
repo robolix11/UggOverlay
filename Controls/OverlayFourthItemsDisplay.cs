@@ -22,8 +22,8 @@ namespace UGG_Overlay.Controls
 		}
 		private void RefreshDisplays()
 		{
-			this.overlayItemDisplay1.Image = _Model.Image1;
-			this.overlayItemDisplay2.Image = _Model.Image2;
+			this.overlayItemDisplay1.Image = _Model?.Image1;
+			this.overlayItemDisplay2.Image = _Model?.Image2;
 		}
 	}
 }

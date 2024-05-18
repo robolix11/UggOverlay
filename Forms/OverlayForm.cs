@@ -13,10 +13,14 @@ namespace UGG_Overlay.Forms
 {
 	public partial class OverlayForm : Form
 	{
+		private System.Timers.Timer refreshChampionTimer;
+
 		public struct RECT
 		{
 			public int Left, Top, Right, Bottom;
 		}
+
+		public IntPtr gameWindowHandle { get; set; }
 
 		public const string WINDOW_NAME = "League of Legends (TM) Client";
 
@@ -33,10 +37,14 @@ namespace UGG_Overlay.Forms
 			this.FormBorderStyle = FormBorderStyle.None;
 			this.ShowInTaskbar = false;
 
+			refreshChampionTimer = new System.Timers.Timer(1000);
+			refreshChampionTimer.AutoReset = true;
+			refreshChampionTimer.Elapsed += RefreshChampionDataTimer_Tick;
 
 			MakeFormClickTrough();
 			this.Opacity = 0.75;
 
+			ClientWindowManager.GameFoundChanged += GameFoundChanged;
 			AllignToCurrentParent();
 		}
 
@@ -45,6 +53,10 @@ namespace UGG_Overlay.Forms
 		public void SetModel(UGG_Overlay.APIs.UGG_Api.Models.ItemsDisplayModel model)
 		{
 			this.overlayMainControl1.Model = model;
+			this.Invoke((MethodInvoker)delegate
+			{
+				this.Refresh();
+			});
 		}
 
 		//############################################################################
@@ -54,6 +66,8 @@ namespace UGG_Overlay.Forms
 			RECT _Rect;
 
 			IntPtr handle = FindWindow(null, WINDOW_NAME);
+
+			gameWindowHandle = handle;
 			GetWindowRect(handle, out _Rect);
 			//Console.WriteLine($"Current Handle Rect [Left:{_Rect.Left},Top:{_Rect.Top},Right:{_Rect.Right},Bottom:{_Rect.Bottom}]");
 
@@ -127,36 +141,64 @@ namespace UGG_Overlay.Forms
 			AllignToCurrentParent();
 		}
 
-		private string currentChampionName;
+		private void GameFoundChanged(object sender, EventArgs e)
+		{
+			Console.WriteLine($"OverlayForm: GameFoundChanged event called");
+
+			if (ClientWindowManager._Instance.GameFound)
+			{
+				Console.WriteLine($"OverlayForm: Refresh ChampionTimer started");
+				//this.RefreshChampionDataTimer.Start();
+				refreshChampionTimer.Start();
+			}
+			else
+			{
+				this.SetModel(null);
+			}
+		}
+
 		private void RefreshChampionDataTimer_Tick(object sender, EventArgs e)
 		{
-			var gameInfo = APIs.RiotClientApi.RiotClientApiControl.GetCurrentGameInformation();
+			Console.WriteLine($"OverlayForm: RefreshChampionTimer tick");
 
-			if (gameInfo == null || gameInfo.Item1 == null || gameInfo.Item2 == null) { return; }
+			refreshChampionTimer.Stop();
 
-			if (currentChampionName == gameInfo.Item2) { return; }
+			APIs.UGG_Api.Models.ItemsDisplayModel result = GetModelFromUggApi();
+			if (result == null)
+			{
+				refreshChampionTimer.Start();
+				return;
+			}
+
+			this.SetModel(result);
+
+			Console.WriteLine($"OverlayForm: Refresh ChampionTimer stopped");
+		}
+
+		private APIs.UGG_Api.Models.ItemsDisplayModel GetModelFromUggApi()
+		{
+			string gameMode = ClientWindowManager._Instance.GameModeName;
+			string championName = ClientWindowManager._Instance.ChampionName;
 
 			string apiGameMode = null;
-			switch (gameInfo.Item1)
+			switch (gameMode)
 			{
 				case "ARAM": apiGameMode = "aram"; break;
 				case "CLASSIC": apiGameMode = null; break;
-				default: return;
+				default: Console.WriteLine($"OverlayForm: Unkown gaeMode: {gameMode}"); return null;
 			}
 
 			string apiChampionName = null;
-			switch (gameInfo.Item2)
+			switch (championName)
 			{
 				case "Nunu & Willump": apiChampionName = "Nunu"; break;
-				default: apiChampionName = gameInfo.Item2; break;
+				default: apiChampionName = championName; break;
 			}
 
 			var uggModel = APIs.UGG_Api.UGG_API_Control.GetUGGDisplayModel(apiGameMode, apiChampionName);
-			if (uggModel == null) { return; }
+			if (uggModel == null) { Console.WriteLine($"OverlayForm: UggApi null return"); return null; }
 
-			currentChampionName = gameInfo.Item2;
-			this.SetModel(uggModel);
-			this.Refresh();
+			return uggModel;
 		}
 
 		//############################################################################
