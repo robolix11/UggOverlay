@@ -37,7 +37,7 @@ namespace UGG_Overlay.APIs.RiotClientApi
 			return new Tuple<string, string>(gameMode, championName);
 		}
 
-		private static bool ConnectionExists()
+		public static bool ConnectionExists()
 		{
 			string url = BASE_URL + "activeplayername";
 			Task<HttpResponseMessage> tsk = GetClient().SendAsync(new HttpRequestMessage(HttpMethod.Get, url) { Version = HttpVersion.Version10 });
@@ -80,7 +80,7 @@ namespace UGG_Overlay.APIs.RiotClientApi
 				if (response.StatusCode == System.Net.HttpStatusCode.OK)
 				{
 					PlayerListModel[] data = await response.Content.ReadAsAsync<PlayerListModel[]>();
-					PlayerListModel currPlayerEntry = data.Single(pl => pl.summonerName == playerName.Replace("\"", "").Substring(0, playerName.IndexOf("#") - 1));
+					PlayerListModel currPlayerEntry = data.Single(pl => pl.summonerName == playerName.Replace("\"", ""));//.Substring(0, playerName.IndexOf("#") - 1));
 					return currPlayerEntry.championName;
 				}
 			}

@@ -18,11 +18,11 @@ namespace UGG_Overlay.Controls
 
 		private void SetChildModels()
 		{
-			this.overlayCoreItemsDisplay1.Model = _Model.CoreItemsDisplayModel;
-			this.overlayStartItemsDisplay1.Model = _Model.StartItemsDisplayModel;
-			this.overlayFourthItemsDisplay1.Model = _Model.FourthItemDisplayModel;
-			this.overlayFithItemsDisplay1.Model = _Model.FithItemDisplayModel;
-			this.overlaySixthItemsDisplay1.Model = _Model.SixthItemDisplayModel;
+			this.overlayCoreItemsDisplay1.Model = _Model?.CoreItemsDisplayModel;
+			this.overlayStartItemsDisplay1.Model = _Model?.StartItemsDisplayModel;
+			this.overlayFourthItemsDisplay1.Model = _Model?.FourthItemDisplayModel;
+			this.overlayFithItemsDisplay1.Model = _Model?.FithItemDisplayModel;
+			this.overlaySixthItemsDisplay1.Model = _Model?.SixthItemDisplayModel;
 		}
 
 		public OverlayMainControl()

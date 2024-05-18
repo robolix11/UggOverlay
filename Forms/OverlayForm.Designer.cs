@@ -32,7 +32,6 @@ namespace UGG_Overlay.Forms
 		{
 			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.Timer WindowAdaptTimer;
-			this.RefreshChampionDataTimer = new System.Windows.Forms.Timer(this.components);
 			this.overlayMainControl1 = new UGG_Overlay.Controls.OverlayMainControl();
 			WindowAdaptTimer = new System.Windows.Forms.Timer(this.components);
 			this.SuspendLayout();
@@ -41,12 +40,6 @@ namespace UGG_Overlay.Forms
 			// 
 			WindowAdaptTimer.Enabled = true;
 			WindowAdaptTimer.Tick += new System.EventHandler(this.WindowAdaptTimer_Tick);
-			// 
-			// RefreshChampionDataTimer
-			// 
-			this.RefreshChampionDataTimer.Enabled = true;
-			this.RefreshChampionDataTimer.Interval = 30000;
-			this.RefreshChampionDataTimer.Tick += new System.EventHandler(this.RefreshChampionDataTimer_Tick);
 			// 
 			// overlayMainControl1
 			// 
@@ -72,6 +65,5 @@ namespace UGG_Overlay.Forms
 		#endregion
 
 		private UGG_Overlay.Controls.OverlayMainControl overlayMainControl1;
-		private Timer RefreshChampionDataTimer;
 	}
 }
