@@ -37,7 +37,7 @@ namespace UGG_Overlay
 		private Timer timer;
 		public ClientWindowManager()
 		{
-			timer = new Timer(10000);
+			timer = new Timer(1000);
 			timer.Elapsed += Timer_Elapsed;
 			timer.AutoReset = true;
 			timer.Start();
