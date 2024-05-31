@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UGG_Overlay.Extensions;
 
@@ -104,9 +105,10 @@ namespace UGG_Overlay.APIs.UGG_Api
 			if (node == null) { return null; }
 
 			string style = node.Attributes["style"].Value;
-			string substr = style.Substring(style.IndexOf("url("), style.IndexOf("zoom:") - style.IndexOf("url("));
-			string itemSheetURL = substr.Substring(4, substr.IndexOf(")") - 4);
-			string startCoords = substr.Reverse().Substring(1, substr.Reverse().IndexOf(":") - 1).Reverse().Replace("px", "").Replace("-", "");
+			Match urlMatch = Regex.Match(style, "url\\(.*?\\)");
+			string itemSheetURL = urlMatch.Value.Substring(4, urlMatch.Value.Length - 5);
+			Match posMatch = Regex.Match(style, "background-position:.*?;");
+			string startCoords = posMatch.Value.Substring(21, posMatch.Value.Length - 22).Replace("px", "").Replace("-", "").Trim();
 
 			
 			
