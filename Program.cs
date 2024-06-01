@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UGG_Overlay.Forms;
+using AutoUpdaterDotNET;
 
 namespace UGG_Overlay
 {
@@ -15,6 +16,8 @@ namespace UGG_Overlay
 		[STAThread]
 		static void Main()
 		{
+			AutoUpdater.Start("https://github.com/robolix11/UggOverlay/releases/latest/download/update.xml");
+
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new ApplicationManager());
