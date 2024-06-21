@@ -31,8 +31,7 @@ namespace UGG_Overlay.Forms
 			this.FormBorderStyle = FormBorderStyle.None;
 			this.ShowInTaskbar = false;
 
-
-			MakeFormClickTrough();
+			//MakeFormClickTrough();
 			this.Opacity = 0.75;
 
 			AllignToCurrentParent();
