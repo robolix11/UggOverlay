@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 
 namespace UGG_Overlay
@@ -35,7 +31,7 @@ namespace UGG_Overlay
 		//#####
 
 		private Timer timer;
-		public ClientWindowManager()
+		private ClientWindowManager()
 		{
 			timer = new Timer(1000);
 			timer.Elapsed += Timer_Elapsed;

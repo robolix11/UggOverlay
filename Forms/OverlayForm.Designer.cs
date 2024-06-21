@@ -32,7 +32,7 @@ namespace UGG_Overlay.Forms
 		{
 			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.Timer WindowAdaptTimer;
-			this.overlayMainControl1 = new UGG_Overlay.Controls.OverlayMainControl();
+			this.overlayMainItemControl1 = new UGG_Overlay.Controls.OverlayMainItemControl();
 			WindowAdaptTimer = new System.Windows.Forms.Timer(this.components);
 			this.SuspendLayout();
 			// 
@@ -41,20 +41,20 @@ namespace UGG_Overlay.Forms
 			WindowAdaptTimer.Enabled = true;
 			WindowAdaptTimer.Tick += new System.EventHandler(this.WindowAdaptTimer_Tick);
 			// 
-			// overlayMainControl1
+			// overlayMainItemControl1
 			// 
-			this.overlayMainControl1.BackColor = System.Drawing.Color.Transparent;
-			this.overlayMainControl1.Location = new System.Drawing.Point(394, 12);
-			this.overlayMainControl1.Name = "overlayMainControl1";
-			this.overlayMainControl1.Size = new System.Drawing.Size(906, 216);
-			this.overlayMainControl1.TabIndex = 0;
+			this.overlayMainItemControl1.BackColor = System.Drawing.Color.Transparent;
+			this.overlayMainItemControl1.Location = new System.Drawing.Point(394, 12);
+			this.overlayMainItemControl1.Name = "overlayMainItemControl1";
+			this.overlayMainItemControl1.Size = new System.Drawing.Size(1000, 216);
+			this.overlayMainItemControl1.TabIndex = 0;
 			// 
 			// OverlayForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1419, 581);
-			this.Controls.Add(this.overlayMainControl1);
+			this.Controls.Add(this.overlayMainItemControl1);
 			this.Name = "OverlayForm";
 			this.Text = "OverlayForm";
 			this.Load += new System.EventHandler(this.OverlayForm_Load);
@@ -64,6 +64,6 @@ namespace UGG_Overlay.Forms
 
 		#endregion
 
-		private UGG_Overlay.Controls.OverlayMainControl overlayMainControl1;
+		private UGG_Overlay.Controls.OverlayMainItemControl overlayMainItemControl1;
 	}
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using UGG_Overlay.Forms;
 
 namespace UGG_Overlay
@@ -15,8 +10,11 @@ namespace UGG_Overlay
 
 		public ApplicationManager()
 		{
-			overlayForm = new OverlayForm();
+			overlayForm = OverlayForm._Instance;
 			systemTrayForm = new SystemTrayForm(this);
+
+			var cli = ClientWindowManager._Instance;
+			var udm = UggDataManager._Instance;
 
 			overlayForm.Show();
 		}

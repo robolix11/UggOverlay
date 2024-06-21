@@ -1,7 +1,7 @@
 ﻿
 namespace UGG_Overlay.Controls
 {
-	partial class OverlayMainControl
+	partial class OverlayMainItemControl
 	{
 		/// <summary> 
 		/// Erforderliche Designervariable.
@@ -34,6 +34,7 @@ namespace UGG_Overlay.Controls
 			this.overlayFourthItemsDisplay1 = new UGG_Overlay.Controls.OverlayFourthItemsDisplay();
 			this.overlayFithItemsDisplay1 = new UGG_Overlay.Controls.OverlayFithItemsDisplay();
 			this.overlaySixthItemsDisplay1 = new UGG_Overlay.Controls.OverlaySixthItemsDisplay();
+			this.ToggleMainItemOverlayVisibilityButon = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// overlayStartItemsDisplay1
@@ -76,18 +77,38 @@ namespace UGG_Overlay.Controls
 			this.overlaySixthItemsDisplay1.Size = new System.Drawing.Size(164, 80);
 			this.overlaySixthItemsDisplay1.TabIndex = 4;
 			// 
-			// OverlayMainControl
+			// ToggleMainItemOverlayVisibilityButon
+			// 
+			this.ToggleMainItemOverlayVisibilityButon.BackColor = System.Drawing.Color.Transparent;
+			this.ToggleMainItemOverlayVisibilityButon.BackgroundImage = global::UGG_Overlay.Properties.Resources.show_view_icon_24x24;
+			this.ToggleMainItemOverlayVisibilityButon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.ToggleMainItemOverlayVisibilityButon.FlatAppearance.BorderSize = 0;
+			this.ToggleMainItemOverlayVisibilityButon.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.ToggleMainItemOverlayVisibilityButon.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.ToggleMainItemOverlayVisibilityButon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.ToggleMainItemOverlayVisibilityButon.Font = new System.Drawing.Font("Microsoft Sans Serif", 5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ToggleMainItemOverlayVisibilityButon.Location = new System.Drawing.Point(906, 0);
+			this.ToggleMainItemOverlayVisibilityButon.Margin = new System.Windows.Forms.Padding(0);
+			this.ToggleMainItemOverlayVisibilityButon.Name = "ToggleMainItemOverlayVisibilityButon";
+			this.ToggleMainItemOverlayVisibilityButon.Padding = new System.Windows.Forms.Padding(3);
+			this.ToggleMainItemOverlayVisibilityButon.Size = new System.Drawing.Size(24, 24);
+			this.ToggleMainItemOverlayVisibilityButon.TabIndex = 5;
+			this.ToggleMainItemOverlayVisibilityButon.UseVisualStyleBackColor = false;
+			this.ToggleMainItemOverlayVisibilityButon.Click += new System.EventHandler(this.ToggleMainItemOverlayVisibilityButon_Click);
+			// 
+			// OverlayMainItemControl
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.Transparent;
+			this.Controls.Add(this.ToggleMainItemOverlayVisibilityButon);
 			this.Controls.Add(this.overlaySixthItemsDisplay1);
 			this.Controls.Add(this.overlayFithItemsDisplay1);
 			this.Controls.Add(this.overlayFourthItemsDisplay1);
 			this.Controls.Add(this.overlayCoreItemsDisplay1);
 			this.Controls.Add(this.overlayStartItemsDisplay1);
-			this.Name = "OverlayMainControl";
-			this.Size = new System.Drawing.Size(922, 92);
+			this.Name = "OverlayMainItemControl";
+			this.Size = new System.Drawing.Size(1064, 92);
 			this.ResumeLayout(false);
 
 		}
@@ -99,5 +120,6 @@ namespace UGG_Overlay.Controls
 		private OverlayFourthItemsDisplay overlayFourthItemsDisplay1;
 		private OverlayFithItemsDisplay overlayFithItemsDisplay1;
 		private OverlaySixthItemsDisplay overlaySixthItemsDisplay1;
+		private System.Windows.Forms.Button ToggleMainItemOverlayVisibilityButon;
 	}
 }

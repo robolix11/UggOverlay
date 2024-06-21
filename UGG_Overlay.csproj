@@ -291,11 +291,11 @@
     <Compile Include="Controls\OverlayItemDisplay.Designer.cs">
       <DependentUpon>OverlayItemDisplay.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OverlayMainControl.cs">
+    <Compile Include="Controls\OverlayMainItemControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\OverlayMainControl.Designer.cs">
-      <DependentUpon>OverlayMainControl.cs</DependentUpon>
+    <Compile Include="Controls\OverlayMainItemControl.Designer.cs">
+      <DependentUpon>OverlayMainItemControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\OverlaySixthItemsDisplay.cs">
       <SubType>UserControl</SubType>
@@ -330,6 +330,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UggDataManager.cs" />
+    <EmbeddedResource Include="Assets\ToggleMainItemDisplayVisibilityResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ToggleMainItemDisplayVisibilityResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\OverlayCoreItemsDisplay.resx">
       <DependentUpon>OverlayCoreItemsDisplay.cs</DependentUpon>
     </EmbeddedResource>
@@ -342,8 +347,8 @@
     <EmbeddedResource Include="Controls\OverlayItemDisplay.resx">
       <DependentUpon>OverlayItemDisplay.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\OverlayMainControl.resx">
-      <DependentUpon>OverlayMainControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\OverlayMainItemControl.resx">
+      <DependentUpon>OverlayMainItemControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\OverlaySixthItemsDisplay.resx">
       <DependentUpon>OverlaySixthItemsDisplay.cs</DependentUpon>
