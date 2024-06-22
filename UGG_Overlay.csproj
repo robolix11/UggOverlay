@@ -272,6 +272,12 @@
     </Compile>
     <Compile Include="ClientWindowManager.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Controls\HorzLineControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\HorzLineControl.Designer.cs">
+      <DependentUpon>HorzLineControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\OverlayCoreItemsDisplay.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -314,6 +320,12 @@
     <Compile Include="Controls\OverlayStartItemsDisplay.Designer.cs">
       <DependentUpon>OverlayStartItemsDisplay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\VertLineControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\VertLineControl.Designer.cs">
+      <DependentUpon>VertLineControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -340,6 +352,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ToggleMainItemDisplayVisibilityResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\HorzLineControl.resx">
+      <DependentUpon>HorzLineControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\OverlayCoreItemsDisplay.resx">
       <DependentUpon>OverlayCoreItemsDisplay.cs</DependentUpon>
     </EmbeddedResource>
@@ -360,6 +375,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\OverlayStartItemsDisplay.resx">
       <DependentUpon>OverlayStartItemsDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\VertLineControl.resx">
+      <DependentUpon>VertLineControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\OverlayForm.resx">
       <DependentUpon>OverlayForm.cs</DependentUpon>
