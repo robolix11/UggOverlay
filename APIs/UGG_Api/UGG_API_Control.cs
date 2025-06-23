@@ -1,15 +1,11 @@
 ﻿using Fizzler.Systems.HtmlAgilityPack;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using UGG_Overlay.Extensions;
 
 namespace UGG_Overlay.APIs.UGG_Api
 {
@@ -28,7 +24,7 @@ namespace UGG_Overlay.APIs.UGG_Api
 			HtmlAgilityPack.HtmlDocument html = new HtmlAgilityPack.HtmlDocument();
 			html.LoadHtml(htmlString);
 
-			var startingItemNodes = html.DocumentNode.QuerySelectorAll(".media-query_DESKTOP_MEDIUM__DESKTOP_LARGE > .starting-items > div > .item-row > div > div > div > div");
+			var startingItemNodes = html.DocumentNode.QuerySelectorAll(".starting-items .item-img > div > div");
 			returnModel.StartItemsDisplayModel = new Models.StartItemsDisplayModel()
 			{
 				Image1 = ParseItemDisplayNode(startingItemNodes.Count() >= 1 ? startingItemNodes.ElementAt(0) : null),
@@ -36,7 +32,7 @@ namespace UGG_Overlay.APIs.UGG_Api
 				Image3 = ParseItemDisplayNode(startingItemNodes.Count() >= 3 ? startingItemNodes.ElementAt(2) : null),
 			};
 
-			var coreItemNodes = html.DocumentNode.QuerySelectorAll(".core-items > .item-row > div > div > div > div");
+			var coreItemNodes = html.DocumentNode.QuerySelectorAll(".core-items .image-wrapper > div > div > div");
 			returnModel.CoreItemsDisplayModel = new Models.CoreItemsDisplayModel()
 			{
 				Image1 = ParseItemDisplayNode(coreItemNodes.ElementAt(0)),
@@ -44,14 +40,14 @@ namespace UGG_Overlay.APIs.UGG_Api
 				Image3 = ParseItemDisplayNode(coreItemNodes.ElementAt(2)),
 			};
 
-			var fourthItemNodes = html.DocumentNode.QuerySelectorAll(".media-query_DESKTOP_MEDIUM__DESKTOP_LARGE > .item-options-1 > .item-option-list > div > div > div > div");
+			var fourthItemNodes = html.DocumentNode.QuerySelectorAll(".item-options-1 .item-option > div > div > div");
 			returnModel.FourthItemDisplayModel = new Models.FourthItemDisplayModel()
 			{
 				Image1 = ParseItemDisplayNode(fourthItemNodes.ElementAt(0)),
 				Image2 = ParseItemDisplayNode(fourthItemNodes.ElementAt(1)),
 			};
 
-			var fithItemNodes = html.DocumentNode.QuerySelectorAll(".media-query_DESKTOP_MEDIUM__DESKTOP_LARGE > .item-options-2 > .item-option-list > div > div > div > div");
+			var fithItemNodes = html.DocumentNode.QuerySelectorAll(".item-options-2 .item-option > div > div > div");
 			returnModel.FithItemDisplayModel = new Models.FithItemDisplayModel()
 			{
 				Image1 = ParseItemDisplayNode(fithItemNodes.ElementAt(0)),
@@ -59,7 +55,7 @@ namespace UGG_Overlay.APIs.UGG_Api
 				Image3 = ParseItemDisplayNode(fithItemNodes.ElementAt(2)),
 			};
 
-			var sixthItemNodes = html.DocumentNode.QuerySelectorAll(".media-query_DESKTOP_MEDIUM__DESKTOP_LARGE > .item-options-3 > .item-option-list > div > div > div > div");
+			var sixthItemNodes = html.DocumentNode.QuerySelectorAll(".item-options-3 .item-option > div > div > div");
 			returnModel.SixthItemDisplayModel = new Models.SixthItemDisplayModel()
 			{
 				Image1 = ParseItemDisplayNode(sixthItemNodes.ElementAt(0)),
@@ -72,7 +68,7 @@ namespace UGG_Overlay.APIs.UGG_Api
 
 		private static async Task<string> GetApiResponse(string gamemode, string championName)
 		{
-			string url = BASE_URL + (gamemode == null ? "" : gamemode + "/") + championName + (gamemode == null ? "/build" : "");
+			string url = BASE_URL + (gamemode == null ? "" : gamemode + "/") + championName + (gamemode == null ? "/build" : $"-{gamemode}");
 
 			bool success = false;
 			int tryCount = 1;
@@ -82,9 +78,9 @@ namespace UGG_Overlay.APIs.UGG_Api
 				Console.WriteLine($"getting Champion Builld ... try Nr {tryCount}");
 				try
 				{
-					using (HttpResponseMessage responseMessage = await API_Helper.ApiClient.SendAsync(new HttpRequestMessage(HttpMethod.Get, url) { Version = HttpVersion.Version10 }).ConfigureAwait(false))
+					using (HttpResponseMessage responseMessage = API_Helper.ApiClient.SendAsync(new HttpRequestMessage(HttpMethod.Get, url) { Version = HttpVersion.Version10 }).GetAwaiter().GetResult())
 					{
-						if(responseMessage.StatusCode == HttpStatusCode.OK)
+						if (responseMessage.StatusCode == HttpStatusCode.OK)
 						{
 							return await responseMessage.Content.ReadAsStringAsync();
 						}
@@ -110,8 +106,8 @@ namespace UGG_Overlay.APIs.UGG_Api
 			Match posMatch = Regex.Match(style, "background-position:.*?;");
 			string startCoords = posMatch.Value.Substring(21, posMatch.Value.Length - 22).Replace("px", "").Replace("-", "").Trim();
 
-			
-			
+
+
 			Task<Bitmap> task = GetSheetImageFromURL(itemSheetURL);
 			task.Wait();
 			Bitmap itemSheet = task.Result;

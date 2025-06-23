@@ -63,6 +63,16 @@ namespace UGG_Overlay.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap hide_view_icon_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("hide_view_icon_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap show_view_icon_24x24 {
             get {
                 object obj = ResourceManager.GetObject("show_view_icon_24x24", resourceCulture);

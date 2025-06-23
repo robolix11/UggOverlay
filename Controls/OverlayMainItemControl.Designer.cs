@@ -80,7 +80,7 @@ namespace UGG_Overlay.Controls
 			// ToggleMainItemOverlayVisibilityButon
 			// 
 			this.ToggleMainItemOverlayVisibilityButon.BackColor = System.Drawing.Color.Transparent;
-			this.ToggleMainItemOverlayVisibilityButon.BackgroundImage = global::UGG_Overlay.Properties.Resources.show_view_icon_24x24;
+			this.ToggleMainItemOverlayVisibilityButon.BackgroundImage = global::UGG_Overlay.Properties.Resources.hide_view_icon_24x24;
 			this.ToggleMainItemOverlayVisibilityButon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.ToggleMainItemOverlayVisibilityButon.FlatAppearance.BorderSize = 0;
 			this.ToggleMainItemOverlayVisibilityButon.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
