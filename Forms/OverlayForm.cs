@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace UGG_Overlay.Forms
 {
 	public partial class OverlayForm : Form
 	{
-		private System.Timers.Timer refreshChampionTimer;
+		public static OverlayForm _Instance { get; private set; } = new OverlayForm();
 
 		public struct RECT
 		{
@@ -24,7 +18,7 @@ namespace UGG_Overlay.Forms
 
 		public const string WINDOW_NAME = "League of Legends (TM) Client";
 
-		public OverlayForm()
+		private OverlayForm()
 		{
 			InitializeComponent();
 		}
@@ -37,22 +31,17 @@ namespace UGG_Overlay.Forms
 			this.FormBorderStyle = FormBorderStyle.None;
 			this.ShowInTaskbar = false;
 
-			refreshChampionTimer = new System.Timers.Timer(1000);
-			refreshChampionTimer.AutoReset = true;
-			refreshChampionTimer.Elapsed += RefreshChampionDataTimer_Tick;
-
-			MakeFormClickTrough();
+			//MakeFormClickTrough();
 			this.Opacity = 0.75;
 
-			ClientWindowManager.GameFoundChanged += GameFoundChanged;
 			AllignToCurrentParent();
 		}
 
 		//############################################################################
 
-		public void SetModel(UGG_Overlay.APIs.UGG_Api.Models.ItemsDisplayModel model)
+		public void SetUggDisplayModel(UGG_Overlay.APIs.UGG_Api.Models.ItemsDisplayModel model)
 		{
-			this.overlayMainControl1.Model = model;
+			this.overlayMainItemControl1.Model = model;
 			this.Invoke((MethodInvoker)delegate
 			{
 				this.Refresh();
@@ -60,6 +49,11 @@ namespace UGG_Overlay.Forms
 		}
 
 		//############################################################################
+
+		private void WindowAdaptTimer_Tick(object sender, EventArgs e)
+		{
+			AllignToCurrentParent();
+		}
 
 		public void AllignToCurrentParent()
 		{
@@ -132,73 +126,6 @@ namespace UGG_Overlay.Forms
 		{
 			int _InitialStyle = GetWindowLong(this.Handle, -20);
 			SetWindowLong(this.Handle, -20, _InitialStyle | 0x80000);
-		}
-
-		//############################################################################
-
-		private void WindowAdaptTimer_Tick(object sender, EventArgs e)
-		{
-			AllignToCurrentParent();
-		}
-
-		private void GameFoundChanged(object sender, EventArgs e)
-		{
-			Console.WriteLine($"OverlayForm: GameFoundChanged event called");
-
-			if (ClientWindowManager._Instance.GameFound)
-			{
-				Console.WriteLine($"OverlayForm: Refresh ChampionTimer started");
-				//this.RefreshChampionDataTimer.Start();
-				refreshChampionTimer.Start();
-			}
-			else
-			{
-				this.SetModel(null);
-			}
-		}
-
-		private void RefreshChampionDataTimer_Tick(object sender, EventArgs e)
-		{
-			Console.WriteLine($"OverlayForm: RefreshChampionTimer tick");
-
-			refreshChampionTimer.Stop();
-
-			APIs.UGG_Api.Models.ItemsDisplayModel result = GetModelFromUggApi();
-			if (result == null)
-			{
-				refreshChampionTimer.Start();
-				return;
-			}
-
-			this.SetModel(result);
-
-			Console.WriteLine($"OverlayForm: Refresh ChampionTimer stopped");
-		}
-
-		private APIs.UGG_Api.Models.ItemsDisplayModel GetModelFromUggApi()
-		{
-			string gameMode = ClientWindowManager._Instance.GameModeName;
-			string championName = ClientWindowManager._Instance.ChampionName;
-
-			string apiGameMode = null;
-			switch (gameMode)
-			{
-				case "ARAM": apiGameMode = "aram"; break;
-				case "CLASSIC": apiGameMode = null; break;
-				default: Console.WriteLine($"OverlayForm: Unkown gaeMode: {gameMode}"); return null;
-			}
-
-			string apiChampionName = null;
-			switch (championName)
-			{
-				case "Nunu & Willump": apiChampionName = "Nunu"; break;
-				default: apiChampionName = championName; break;
-			}
-
-			var uggModel = APIs.UGG_Api.UGG_API_Control.GetUGGDisplayModel(apiGameMode, apiChampionName);
-			if (uggModel == null) { Console.WriteLine($"OverlayForm: UggApi null return"); return null; }
-
-			return uggModel;
 		}
 
 		//############################################################################
