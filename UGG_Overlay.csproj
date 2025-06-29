@@ -396,6 +396,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="PostBuild.ps1" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -444,4 +445,7 @@
   <Import Project="packages\Microsoft.Web.WebView2.1.0.2478.35\build\Microsoft.Web.WebView2.targets" Condition="Exists('packages\Microsoft.Web.WebView2.1.0.2478.35\build\Microsoft.Web.WebView2.targets')" />
   <Import Project="packages\Costura.Fody.5.7.0\build\Costura.Fody.targets" Condition="Exists('packages\Costura.Fody.5.7.0\build\Costura.Fody.targets')" />
   <Import Project="packages\Fody.6.8.1\build\Fody.targets" Condition="Exists('packages\Fody.6.8.1\build\Fody.targets')" />
+  <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(ProjectDir)PostBuild.ps1&quot;" />
+  </Target>
 </Project>
